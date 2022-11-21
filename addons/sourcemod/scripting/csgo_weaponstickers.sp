@@ -230,7 +230,7 @@ public void OnGiveNamedItemPost(int client, const char[] classname, const CEconI
 
 void SetWeaponSticker(int client, int entity)
 {
-	if (IsClientInGame(client) && !IsFakeClient(client) && IsValidEntity(entity))
+	if (IsClientInGame(client) && IsValidEntity(entity))
 	{
 		int defIndex = eItems_GetWeaponDefIndexByWeapon(entity);
 		if (IsValidDefIndex(defIndex) && ClientWeaponHasStickers(client, defIndex))
@@ -276,8 +276,8 @@ void SetWeaponSticker(int client, int entity)
 				if (isUpdated && g_isStickerRefresh[client])
 				{
 					g_isStickerRefresh[client] = false;
-			
-					if (g_cvarUpdateViewModel.BoolValue)
+
+					if (g_cvarUpdateViewModel.BoolValue && !IsFakeClient(client))
 					{
 						PTaH_ForceFullUpdate(client);
 					}

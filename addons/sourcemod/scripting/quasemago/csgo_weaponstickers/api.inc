@@ -43,8 +43,7 @@ public int Native_SetWeaponSticker(Handle plugins, int numParams)
 	Address pEconItemView = pWeapon + view_as<Address>(g_econItemOffset);
 	SetAttributeValue(client, pEconItemView, defIndex, "sticker slot %i id", slot);
 	SetAttributeValue(client, pEconItemView, view_as<int>(GetNativeCell(5)), "sticker slot %i wear", slot);
-
-	PTaH_ForceFullUpdate(client);
+	if (!IsFakeClient(client)) PTaH_ForceFullUpdate(client);
 	return true;
 }
 
